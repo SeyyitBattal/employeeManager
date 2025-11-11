@@ -23,7 +23,8 @@ public class EmployeeController {
         employees = new HashMap<>();
         employees.put(1, new Employee(1,"Ali","ali@ali.com",
                 "Junior Developer","0505505505",
-                "https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg"));
+                "https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg",
+                "12BNe22"));
     }
 
     @GetMapping("/")
