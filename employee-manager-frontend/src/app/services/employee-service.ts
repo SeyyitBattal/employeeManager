@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Employee } from '../models/employee';
 
 @Injectable({
   providedIn: 'root',
@@ -19,20 +20,20 @@ export class EmployeeService {
     });
   }
 
-  getAllEmployees() : Observable<EmployeeService[]>{
-    return this.http.get<EmployeeService[]>(this.apiUrl, {headers : this.getHeaders()});
+  getAllEmployees() : Observable<Employee[]>{
+    return this.http.get<Employee[]>(this.apiUrl, {headers : this.getHeaders()});
   }
 
-  getEmployee(id : number) : Observable<EmployeeService>{
-  return this.http.get<EmployeeService>(`${this.apiUrl}/${id}`, {headers : this.getHeaders()});
+  getEmployee(id : number) : Observable<Employee>{
+  return this.http.get<Employee>(`${this.apiUrl}/${id}`, {headers : this.getHeaders()});
 }
 
-addEmployee(employee : EmployeeService) : Observable<EmployeeService>{
-return this.http.post<EmployeeService>(this.apiUrl, employee, {headers : this.getHeaders()});
+addEmployee(employee : Employee) : Observable<Employee>{
+return this.http.post<Employee>(this.apiUrl, employee, {headers : this.getHeaders()});
 }
 
-updateEmployee(id: number, employee : EmployeeService) : Observable<EmployeeService>{
-  return this.http.put<EmployeeService>(`${this.apiUrl}/${id}`, employee, {headers : this.getHeaders()});
+updateEmployee(id: number, employee : Employee) : Observable<Employee>{
+  return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee, {headers : this.getHeaders()});
 }
 
 deleteEmployee(id : number) : Observable<boolean>{
