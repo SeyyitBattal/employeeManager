@@ -1,13 +1,15 @@
-import { Component, Input, OnChanges, Output, EventEmitter, NgModule } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../../services/employee-service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './employee-form.html',
   styleUrl: './employee-form.css',
+  standalone:true,
 })
 export class EmployeeForm implements OnChanges{
 

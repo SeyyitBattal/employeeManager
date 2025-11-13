@@ -6,7 +6,8 @@ import { EmployeeList } from "./components/employee-list/employee-list";
   selector: 'app-root',
   imports: [RouterOutlet, EmployeeList],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
+  standalone:true,
 })
 export class App {
   title = "Employee Manager";

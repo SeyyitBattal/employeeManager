@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../../services/employee-service';
 import { EmployeeForm } from "../employee-form/employee-form";
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-list',
-  imports: [EmployeeForm],
+  imports: [EmployeeForm, CommonModule, FormsModule],
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.css',
+  standalone:true,
 })
 export class EmployeeList implements OnInit {
 employees : Employee[] = [];
