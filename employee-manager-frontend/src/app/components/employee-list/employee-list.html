@@ -15,16 +15,14 @@
 </thead>
 
 <tbody>
-    <tr
-        @for (employee of employees; track $index) {
+        @for (employee of employees; track employee.id) {
+        <tr
             [class.table-active] = "employee === selectedEmployee"
-            (click)="onSelect(employee)"
-        }>
-        <td>{{employee.id}}</td>
-        <td>{{ employee.name }}</td>
+            (click)="onSelect(employee)">
+            <td>{{employee.id}}</td>
+            <td>{{ employee.name }}</td>
             <td>{{ employee.email }}</td>
             <td>{{ employee.jobTitle }}</td>
-
             <td>
         <button class="btn btn-danger btn-sm" 
                       (click)="deleteEmployee(employee.id); $event.stopPropagation()">
@@ -32,6 +30,7 @@
               </button>
             </td>
     </tr>
+}
 </tbody>
 </table>
 </div>
