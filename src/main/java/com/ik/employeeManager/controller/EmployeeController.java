@@ -1,34 +1,46 @@
 package com.ik.employeeManager.controller;
 
 import com.ik.employeeManager.entity.Employee;
-import jakarta.annotation.PostConstruct;
+import com.ik.employeeManager.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/api/employees")
+@CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class EmployeeController {
 
-    Map<Integer, Employee> employees;
+    private final EmployeeService employeeService;
 
-    @PostConstruct
-    public void init(){
-        employees = new HashMap<>();
-        employees.put(1, new Employee(1,"Ali","ali@ali.com",
-                "Junior Developer","0505505505",
-                "https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg",
-                "12BNe22"));
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/")
-    public List<Employee> allEmployees() {
-        return  employees.values().stream().toList();
+    public List<Employee> getAllEmployees(){
+        return employeeService.getAllEmployees();
+    }
+
+    @PostMapping("/")
+    public Employee createEmployee(@RequestBody Employee employee){
+        return employeeService.addEmployee(employee);
+    }
+
+    @GetMapping("/{id}")
+    public Employee findEmployee(@PathVariable Long id){
+        return employeeService.getEmployee(id);
+    }
+
+    @PutMapping("/{id}")
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
+        return employeeService.updateEmployee(id, employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteEmployee(@PathVariable Long id){
+        return employeeService.deleteEmployee(id);
     }
 }
