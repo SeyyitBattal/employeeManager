@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './employee-form.css',
   standalone:true,
 })
+
 export class EmployeeForm implements OnChanges{
 
   @Input() employee? : Employee;

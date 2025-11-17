@@ -27,6 +27,11 @@ public class EmployeeService {
                 "https://img.freepik.com/premium-vector/business-woman-character-vector-illustration_1133257-2432.jpg?semt=ais_hybrid&w=740&q=80",
                 "EMP8964"));
 
+        addEmployee(new Employee(0, "Veli Vel", "vel@vel.com",
+                "IT Director", "921921291",
+                "",
+                "EMP2378"));
+
     }
 
     public List<Employee> getAllEmployees(){

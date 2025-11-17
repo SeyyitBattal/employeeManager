@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class EmployeeList implements OnInit {
 employees : Employee[] = [];
 selectedEmployee? : Employee;
+errorMessage : string = '';
 
 constructor(private employeeService : EmployeeService){}
 
@@ -25,10 +26,12 @@ constructor(private employeeService : EmployeeService){}
   loadEmployees() : void{
     this.employeeService.getAllEmployees().subscribe({
       next : (data) => {
+        console.log("Employees loaded: " ,data);
         this.employees = data;
       }, 
       error : (error) => {
         console.error('Loading Employees Error: ', error);
+        this.errorMessage = "Failed to load employees. Please check the console for details.";
       }
     });
   }

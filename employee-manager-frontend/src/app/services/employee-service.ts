@@ -11,7 +11,7 @@ export class EmployeeService {
   private apiUrl : string;
 
   constructor(private http : HttpClient){
-    this.apiUrl = 'http://localhost:4200/api/employees';
+    this.apiUrl = 'http://localhost:8080/api/employees';
   }
 
   private getHeaders() : HttpHeaders {
@@ -21,7 +21,7 @@ export class EmployeeService {
   }
 
   getAllEmployees() : Observable<Employee[]>{
-    return this.http.get<Employee[]>(this.apiUrl, {headers : this.getHeaders()});
+    return this.http.get<Employee[]>(`${this.apiUrl}/`, {headers : this.getHeaders()});
   }
 
   getEmployee(id : number) : Observable<Employee>{
@@ -29,7 +29,7 @@ export class EmployeeService {
 }
 
 addEmployee(employee : Employee) : Observable<Employee>{
-return this.http.post<Employee>(this.apiUrl, employee, {headers : this.getHeaders()});
+return this.http.post<Employee>(`${this.apiUrl}/`, employee, {headers : this.getHeaders()});
 }
 
 updateEmployee(id: number, employee : Employee) : Observable<Employee>{
