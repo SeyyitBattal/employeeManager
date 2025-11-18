@@ -26,12 +26,12 @@ constructor(private employeeService : EmployeeService){}
   loadEmployees() : void{
     this.employeeService.getAllEmployees().subscribe({
       next : (data) => {
-        console.log("Employees loaded: " ,data);
         this.employees = data;
+        console.log("Employees loaded: " ,data);
       }, 
       error : (error) => {
-        console.error('Loading Employees Error: ', error);
         this.errorMessage = "Failed to load employees. Please check the console for details.";
+        console.error('Loading Employees Error: ', error);
       }
     });
   }
@@ -46,16 +46,27 @@ constructor(private employeeService : EmployeeService){}
         next : () => {
           this.employees = this.employees.filter(e => e.id !== id);
           this.selectedEmployee = undefined;
+          console.log("Employee deleted: " + this.employees[id]);
         },
         error: (error) => {
           console.error("Deleting Employee Error: ", error);
+          this.loadEmployees();
         }
       });
     }
   }
 
   onEmployeeSaved(employee : Employee):void{
-    this.loadEmployees();
+    if(employee.id){
+      const index = this.employees.findIndex(e => e.id === employee.id);
+      if(index !== -1){
+        this.employees[index] = employee;
+      }
+    }else{
+      this.employees.unshift(employee);
+    }
+    this.employees = [...this.employees];
+    this.selectedEmployee = undefined;
   }
 
 }

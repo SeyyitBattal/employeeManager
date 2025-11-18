@@ -46,9 +46,10 @@ return{
 
 onSubmit() : void{
   if(this.isEditing){
-    this.employeeService.updateEmployee(this.model.id, this.model).subscribe({
-      next : (employee) => {
-        this.employeeSaved.emit(employee);
+    this.employeeService.updateEmployee(this.model.id, this.model)
+    .subscribe({
+      next : (updatedEmployee) => {
+        this.employeeSaved.emit(updatedEmployee);
         this.resetForm();
       },
       error : (error) => {
@@ -57,8 +58,8 @@ onSubmit() : void{
     });
   }else{
     this.employeeService.addEmployee(this.model).subscribe({
-      next : (employee) => {
-        this.employeeSaved.emit(employee);
+      next : (newEmployee) => {
+        this.employeeSaved.emit(newEmployee);
         this.resetForm();
       },
       error : (error) => {
