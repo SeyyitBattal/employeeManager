@@ -1,20 +1,21 @@
 package com.ik.employeeManager.service;
 
 import com.ik.employeeManager.entity.Employee;
-import jakarta.annotation.PostConstruct;
+import com.ik.employeeManager.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class EmployeeService {
 
+    private final EmployeeRepository employeeRepository;
+
+  /* DB BAĞLANTISI YAPILDIKTAN SONRA BU KODLARA İHTİYAÇ YOK!
+
     private final Map<Long, Employee> employees =  new HashMap<>();
     private final AtomicLong nextId = new AtomicLong(1);
-
     @PostConstruct
     public void init(){
         addEmployee(new Employee(0, "Ali Al", "ali@ali.com",
@@ -31,35 +32,40 @@ public class EmployeeService {
                 "IT Director", "921921291",
                 "",
                 "EMP2378"));
+    }
+    */
 
+    @Autowired
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     public List<Employee> getAllEmployees(){
-    return employees.values().stream().toList();
+    return employeeRepository.findAll();
     }
 
     public Employee getEmployee(Long id){
-        return employees.get(id);
+        return employeeRepository.findById(id).orElse(null);
     }
 
     public Employee addEmployee(Employee employee){
-        Long newId = nextId.getAndIncrement();
-        employee.setId(newId);
-        employees.put(newId, employee);
-        return employee;
+        return employeeRepository.save(employee);
     }
 
     public Employee updateEmployee(Long id, Employee employee){
-        if(employees.containsKey(id)){
+        if (employeeRepository.existsById(id)){
             employee.setId(id);
-            employees.put(id, employee);
-            return employee;
+            return employeeRepository.save(employee);
         }
         return null;
     }
 
    public boolean deleteEmployee(Long id){
-        return  employees.remove(id) != null;
+        if (employeeRepository.existsById(id)){
+            employeeRepository.deleteById(id);
+            return true;
+        }
+        return false;
    }
 
 }
