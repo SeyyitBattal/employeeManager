@@ -1,1 +1,1 @@
-Employee Managing System (Java Spring Boot + Angular)
+Employee Managing System (Java Spring Boot + Angular + SQL)
