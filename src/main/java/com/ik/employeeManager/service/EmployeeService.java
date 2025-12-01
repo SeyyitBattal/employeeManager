@@ -1,6 +1,7 @@
 package com.ik.employeeManager.service;
 
 import com.ik.employeeManager.entity.Employee;
+import com.ik.employeeManager.exceptions.EmployeeException;
 import com.ik.employeeManager.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

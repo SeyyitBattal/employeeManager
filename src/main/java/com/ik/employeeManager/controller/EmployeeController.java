@@ -1,6 +1,7 @@
 package com.ik.employeeManager.controller;
 
 import com.ik.employeeManager.entity.Employee;
+import com.ik.employeeManager.exceptions.IdValidation;
 import com.ik.employeeManager.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -31,16 +32,19 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public Employee findEmployee(@PathVariable Long id){
+        IdValidation.idIdValid(id);
         return employeeService.getEmployee(id);
     }
 
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
+        IdValidation.idIdValid(id);
         return employeeService.updateEmployee(id, employee);
     }
 
     @DeleteMapping("/{id}")
     public boolean deleteEmployee(@PathVariable Long id){
-        return employeeService.deleteEmployee(id);
+       IdValidation.idIdValid(id);
+       return employeeService.deleteEmployee(id);
     }
 }
