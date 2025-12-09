@@ -1,9 +1,19 @@
 <div class="card">
     <div class="card-header">
-        <h4>{{isEditing ? 'Edit Employee' : 'Add New Employee'}}</h4>
+        <h2>{{isEditing ? 'Edit Employee' : 'Add New Employee'}}</h2>
     </div>
     <div class="card-body">
         <form (ngSubmit) = "onSubmit()">
+           <div class="image-form-container">
+            <div class="image-section">
+                @if(model.imageUrl){
+                    <img src={{model.imageUrl}}  alt={{model.name}} class="employee-picture">
+                } @else{
+                    <img src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="  class="employee-picture">
+                }
+            </div>
+
+        <div class="form-section">
             <div class="mb-3">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" [(ngModel)] = "model.name" name="name" required>
@@ -44,6 +54,8 @@
                 </button>
                 }
             </div>
+            </div>
+        </div>
         </form>
     </div>
 </div>

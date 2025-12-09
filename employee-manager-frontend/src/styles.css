@@ -31,7 +31,7 @@ body {
 
 .navbar-brand {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #ffffff !important;
   text-decoration: none;
 }
@@ -230,4 +230,26 @@ body {
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
+}
+
+.employee-picture{
+  margin-top: 0.5rem;
+  width: 13rem; 
+  height: 14rem;
+  border-radius: 3rem;
+  object-fit: cover;
+}
+
+.image-form-container{
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.image-section{
+  flex: 0 0 auto;
+}
+
+.form-section{
+ flex: 1;
 }
