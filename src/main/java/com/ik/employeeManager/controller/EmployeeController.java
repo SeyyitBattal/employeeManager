@@ -3,11 +3,14 @@ package com.ik.employeeManager.controller;
 import com.ik.employeeManager.entity.Employee;
 import com.ik.employeeManager.exceptions.IdValidation;
 import com.ik.employeeManager.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/employees")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -26,7 +29,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/")
-    public Employee createEmployee(@RequestBody Employee employee){
+    public Employee createEmployee(@Valid @RequestBody Employee employee){
         return employeeService.addEmployee(employee);
     }
 
@@ -37,7 +40,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
+    public Employee updateEmployee(@PathVariable Long id, @Valid @RequestBody Employee employee){
         IdValidation.idIdValid(id);
         return employeeService.updateEmployee(id, employee);
     }
