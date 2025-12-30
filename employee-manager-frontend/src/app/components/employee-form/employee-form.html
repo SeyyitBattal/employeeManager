@@ -3,7 +3,7 @@
         <h2>{{isEditing ? 'Edit Employee' : 'Add New Employee'}}</h2>
     </div>
     <div class="card-body">
-        <form (ngSubmit) = "onSubmit()">
+        <form (ngSubmit) = "employeeForm.form.valid && onSubmit()" #employeeForm = "ngForm" novalidate>
            <div class="image-form-container">
             <div class="image-section">
                 @if(model.imageUrl){
@@ -16,32 +16,60 @@
         <div class="form-section">
             <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" [(ngModel)] = "model.name" name="name" required>
+            <input type="text" class="form-control" placeholder="name" [(ngModel)] = "model.name" name="name" 
+            #name="ngModel" required [class.is-valid] = "name.invalid && name.touched">
+            @if(name.invalid && name.touched){
+                <div class="invalid-feedback">Please fill name</div>
+            }
             </div>
 
             <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control" [(ngModel)] = "model.email" name="email" required>
+            <input type="email" class="form-control" placeholder="example@exp.com" [(ngModel)] = "model.email" name="email" 
+            #email="ngModel" required email [class.is-valid] = "email.invalid && email.touched">
+            @if(email.invalid && email.touched){
+                <div class="invalid-feedback">
+                    {{email.errors?.['required'] ? 'Please fill email' : 'Please check email'}}
+                </div>
+            }
             </div>
 
             <div class="mb-3">
             <label class="form-label">Job Title</label>
-            <input type="text" class="form-control" [(ngModel)] = "model.jobTitle" name="jobTitle" required>
+            <input type="text" class="form-control" placeholder="job title" [(ngModel)] = "model.jobTitle" name="jobTitle" 
+            #jobTitle="ngModel" required [class.is-valid]= "jobTitle.invalid && jobTitle.touched">
+            @if(jobTitle.invalid && jobTitle.touched){
+                <div class="invalid-feedback">Please fill job title</div>
+            }
             </div>
 
             <div class="mb-3">
             <label class="form-label">Phone Number</label>
-            <input type="text" class="form-control" [(ngModel)] = "model.phoneNumber" name="phoneNumber" required>
+            <input type="text" class="form-control" placeholder="555-555-55-55" [(ngModel)] = "model.phoneNumber" name="phoneNumber" 
+            #phoneNumber = "ngModel" required pattern="^[0-9]*$" [class.is-valid] = "phoneNumber.invalid && phoneNumber.touched">
+            @if(phoneNumber.invalid && phoneNumber.touched){
+                <div class="invalid-feedback">
+                    {{phoneNumber.errors?.['required'] ? 'Please fill phone number' : 'Please check phone number'}}
+                </div>
+            }
             </div>
 
             <div class="mb-3">
             <label class="form-label">Image URL</label>
-            <input type="text" class="form-control" [(ngModel)] = "model.imageUrl" name="imageUrl" required>
+            <input type="text" class="form-control" placeholder="URL" [(ngModel)] = "model.imageUrl" name="imageUrl" 
+            #imageUrl="ngModel" required [class.is-valid]= "imageUrl.invalid && imageUrl.touched">
+            @if(imageUrl.invalid && imageUrl.touched){
+                <div class="invalid-feedback">Please add employee's picture</div>
+            }
             </div>
 
             <div class="mb-3">
             <label class="form-label">Employee Code</label>
-            <input type="text" class="form-control" [(ngModel)] = "model.employeeCode" name="employeeCode" required>
+            <input type="text" class="form-control" placeholder="employee code" [(ngModel)] = "model.employeeCode" name="employeeCode" 
+            #employeeCode="ngModel" required [class.is-valid] ="employeeCode.invalid && employeeCode.touched">
+            @if(employeeCode.invalid && employeeCode.touched){
+                <div class="invalid-feedback">Please fill employee code</div>
+            }
             </div>
 
             <div class="d-grid gap-2">
