@@ -58,6 +58,9 @@
             <label class="form-label">Image URL</label>
             <input type="text" class="form-control" placeholder="URL" [(ngModel)] = "model.imageUrl" name="imageUrl" 
             #imageUrl="ngModel" required [class.is-valid]= "imageUrl.invalid && imageUrl.touched">
+            <input type="file" #fileInput style="display: none" accept="image/*" (change)="onFileSelected($event)">
+            <button type="button" (click)="fileInput.click()">Choose a picture</button>
+
             @if(imageUrl.invalid && imageUrl.touched){
                 <div class="invalid-feedback">Please add employee's picture</div>
             }

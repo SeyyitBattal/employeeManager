@@ -44,6 +44,17 @@ return{
 };
 }
 
+onFileSelected(event : any){
+  const file : File = event.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = (e : any) => {
+      this.model.imageUrl = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
 onSubmit() : void{
   if(this.isEditing){
     this.employeeService.updateEmployee(this.model.id, this.model)
